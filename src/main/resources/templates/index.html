@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>나무위키:대문</title>
+
+    <style type="text/css">
+        ul{
+            list-style:none;
+            padding-left:0px;
+
+        }
+        li{
+            float:left;
+            margin-right:10px ;
+        }
+        #logo{
+            width: 100px;
+            height: 60px;
+            padding-left: 10px;
+            padding-top: 5px;
+        }
+        #main1,#main2,#main3{
+            padding-top: 40px;
+
+
+        }
+        .head_font{
+            padding-top: 40px;
+            font-family: "JetBrains Mono";
+            font-size: 12px;
+            font-weight:bolder;
+            color:white;
+            float: right;
+        }
+        #main1{
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+        #main2{
+            width: 25px;
+            height: 20px;
+            margin-right: 10px;
+
+        }
+        #main3{
+            width: 25px;
+            height: 20px;
+            margin-right: 10px;
+
+        }
+
+        body{
+            width: max-content;
+            height: 100%;
+        }
+        header{
+            width: 1080px;
+            height: 80px;
+            background-color:#008275;
+        }
+        #search {
+            width: 30px;
+            height: 30px;
+        }
+        #member{
+            width: 60px;
+            height: 40px;
+        }
+        #head_search{
+            padding-top: 30px;
+        }
+        #head_search_button{
+            padding-right: 10px;
+            padding-top: 25px;
+        }
+        #head_member{
+            padding-top: 15px;
+        }
+        #head_search {
+            margin-left:300px;
+        }
+    </style>
+
+</head>
+<body id="container">
+<header>
+    <ul>
+        <li>
+            <img src="img/logo.png" id="logo">
+        </li>
+        <li>
+            <img src="img/main1.png" id="main1"> <div class="head_font">최근 변경</div>
+        </li>
+        <li>
+            <img src="img/main2.png" id="main2"> <div class="head_font">최근 토론</div>
+        </li>
+        <li>
+            <img src="img/main3.png" id="main3">  <div class="head_font">특수 기능</div>
+        </li>
+        <li>
+            <div id="head_search"><input type="text" placeholder="Search" style="width:200px;height:30px;"></div>
+        </li>
+        <li>
+            <div id="head_search_button"><button type="button"><img src="img/search.png" id="search"></button></div>
+        </li>
+        <li>
+            <div id="head_member"><button type="button"><img src="img/member.png" id="member"></button></div>
+        </li>
+    </ul>
+    <br>
+    <a th:href="@{/loginuser/login}">로그인</a>
+</header>
+
+<footer></footer>
+</body>
+</html>
