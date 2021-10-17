@@ -4,12 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import me.project.namuwikiPro.DTO.MemberDto;
 import me.project.namuwikiPro.domain.Member;
-import me.project.namuwikiPro.exception.CustomException;
 import me.project.namuwikiPro.principal.AccountContext;
 import me.project.namuwikiPro.repository.MemberRepository;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -37,8 +33,6 @@ public class Memberservice implements UserDetailsService {
          BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
          dto.setPassword(passwordEncoder.encode(dto.getPassword()));
 
-        Optional<Member> findMember = memberRepository.findById(dto.getId());
-
         if(dto.getUsername().equals("seonghoo1217@naver.com")){
              dto.setMemberType("ADMIN");
             }else {
@@ -46,13 +40,16 @@ public class Memberservice implements UserDetailsService {
             }
 
              return memberRepository.save(dto.toEntity()).getId();
-
     }
 
+    public boolean checkEmailDuplicate(String username){
+        return memberRepository.existsByUsername(username);
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Member member= memberRepository.findByUsername(username).get();
+
         return new AccountContext(member);
     }
 }

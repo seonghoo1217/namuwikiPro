@@ -26,11 +26,10 @@ public class MemberDto {
 
     private String realname;
 
-    @NotBlank(message = "이메일을 입력해주세요")
-    @Email(message = "올바른 이메일형태로 입력을 해주세요")
+    @NotBlank
     private String username;
 
-    @NotBlank(message = "비밀번호를 입력해주세요")
+    @NotBlank
     private String password;
 
     private String age;

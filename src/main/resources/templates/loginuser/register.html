@@ -3,17 +3,12 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
-<script th:inline="javascript">
-
-
-
-</script>
-
 
 
 <head>
     <meta charset="UTF-8">
     <title>register</title>
+
 </head>
 <body>
 <h1>회원가입</h1>
@@ -21,14 +16,11 @@
 
 <form th:action="@{/loginuser/register}"  method="post">
         <div class="form-group">
-        <input type="text" class="form-control" id="username" name="username"  placeholder="이메일 입력">
+                <input type="text" class="form-control" id="username" name="username"  placeholder="이메일 입력" autocomplete="username" required />
+                <button id="dup" name="dup" value="중복 확인" class="btn" onclick = "location.href = 'loginuser/{username}/exists' ,checkId()" />
         </div>
         <div class="form-group">
         <input type="password" class="form-control" id="password" name="password"  placeholder="비밀번호 입력">
-        </div>>
-        <div class="form-group">
-        </div>
-        <div class="form-group">
         </div>
         <div class="form-group">
         </div>
