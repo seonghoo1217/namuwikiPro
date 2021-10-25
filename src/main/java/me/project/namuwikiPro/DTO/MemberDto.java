@@ -38,9 +38,11 @@ public class MemberDto {
 
     private String memberType;
 
+    private int unique;
+
 
     @Builder
-    public MemberDto(Long id,String realname, String username, String password,String street,String age,String memberType) {
+    public MemberDto(Long id,String realname, String username, String password,String street,String age,String memberType,int unique) {
         this.id=id;
         this.realname = realname;
         this.username = username;
@@ -48,6 +50,7 @@ public class MemberDto {
         this.street=street;
         this.age=age;
         this.memberType=memberType;
+        this.unique=unique;
     }
 
     public Member toEntity(){
@@ -58,6 +61,7 @@ public class MemberDto {
                 .realname(realname)
                 .age(age)
                 .street(street)
+                .unique(unique)
                 .memberType(memberType)
                 .build();
     }

@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <title>register</title>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <h1>회원가입</h1>
@@ -17,16 +17,25 @@
 <form th:action="@{/loginuser/register}"  method="post">
         <div class="form-group">
                 <input type="text" class="form-control" id="username" name="username"  placeholder="이메일 입력" autocomplete="username" required />
-                <button id="dup" name="dup" value="중복 확인" class="btn" onclick = "location.href = 'loginuser/{username}/exists' ,checkId()" />
+
+                <span th:if="${dto.unique}==1">
+                        이미있는 아이디입니다
+                </span>
+                <span th:if="${dto.unique}==0">
+                        사용할수있는 아이디입니다
+                </span>
         </div>
+
         <div class="form-group">
         <input type="password" class="form-control" id="password" name="password"  placeholder="비밀번호 입력">
         </div>
         <div class="form-group">
         </div>
-        <button class="btn btn-primary" type="submit" >회원가입</button>
+        <button id="registed" class="btn btn-primary" type="submit" >회원가입</button>
         <button class="btn"><a href="index">가입 취소</a></button>
 </form>
+<button class="btn" th:onclick="checkId()">중복 검사</button>
 
 </body>
+<script type="text/javascript" th:src="@{/js/register.js}"></script>
 </html>

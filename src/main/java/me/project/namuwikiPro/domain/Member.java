@@ -47,16 +47,18 @@ public class Member {
     @Column(name = "member_type")
     private String memberType;
 
-
+    @Column(name = "member_unique")
+    private int unique;
 
     @Builder
-    public Member(Long id,String realname, String username, String password,String street,String age,String memberType) {
+    public Member(Long id,String realname, String username, String password,String street,String age,String memberType,int unique) {
         this.id=id;
         this.realname = realname;
         this.username = username;
         this.password = password;
         this.street=street;
         this.age=age;
+        this.unique=unique;
         this.memberType=memberType;
     }
 }

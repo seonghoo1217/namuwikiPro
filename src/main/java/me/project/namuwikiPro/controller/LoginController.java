@@ -60,13 +60,15 @@ public class LoginController{
 
 
     @GetMapping("/register")
-    public String createUserForm(){
+    public String createUserForm(MemberDto dto, Model model){
+
+        model.addAttribute("dto", dto);
 
         return "loginuser/register";
     }
 
     @PostMapping("/register")
-    public String createUser(@Validated MemberDto dto, BindingResult result) {
+    public String createUser(@Validated MemberDto dto, BindingResult result,Model model) {
         if (result.hasErrors()) {
             Map<String, String> errorMap = new HashMap<>();
 
@@ -79,20 +81,22 @@ public class LoginController{
             throw new ValidationException("회원가입 에러!", (Throwable) errorMap);
         } else {
             try {
+                dto.setUnique(1);
                 memberservice.createUser(dto);
             } catch (Exception e) {
                 log.error(e.getMessage());
+                dto.setUnique(0);
+                model.addAttribute("dto",dto);
                 return "redirect:/loginuser/register";
             }
-
-
             return "loginuser/login";
         }
 
 
     }
-    @GetMapping("/exists")
-    public ResponseEntity<Boolean> checkEmailDuplicate(@PathVariable String username){
-        return ResponseEntity.ok(memberservice.checkEmailDuplicate(username));
-    }
+
+
+
+
+
 }

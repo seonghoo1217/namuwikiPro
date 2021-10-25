@@ -36,14 +36,19 @@ public class Memberservice implements UserDetailsService {
         if(dto.getUsername().equals("seonghoo1217@naver.com")){
              dto.setMemberType("ADMIN");
             }else {
-             dto.setMemberType("USER");
-            }
-
+            dto.setMemberType("USER");
+        }
              return memberRepository.save(dto.toEntity()).getId();
     }
-
-    public boolean checkEmailDuplicate(String username){
-        return memberRepository.existsByUsername(username);
+    @Transactional
+    public int findById(Long id){
+        Member findMember = memberRepository.findById(id).get();
+        if(findMember == null){
+            return 1;
+        }
+        else {
+            return 0;
+        }
     }
 
     @Override
