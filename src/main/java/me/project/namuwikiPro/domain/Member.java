@@ -1,19 +1,8 @@
 package me.project.namuwikiPro.domain;
 
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
-import static javax.persistence.FetchType.*;
 
 @Entity @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
