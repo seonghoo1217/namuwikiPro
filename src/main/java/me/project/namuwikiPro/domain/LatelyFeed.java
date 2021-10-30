@@ -5,6 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static javax.persistence.FetchType.LAZY;
 
 @Entity @Getter @Setter
@@ -21,8 +24,8 @@ public class LatelyFeed extends BaseEntity{
     @Column(name = "lately_id")
     private Long id;
 
-    @ManyToOne(fetch = LAZY)
+    @OneToMany(mappedBy ="latelyFeed")
     @JoinColumn(name = "board_id")
-    private Board board;
+    private List<Board> boards=new ArrayList<>();
 
 }

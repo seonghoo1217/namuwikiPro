@@ -110,7 +110,10 @@
         </li>
     </ul>
     <br>
+    <br>
+    <br>
     <a th:href="@{/loginuser/login}">로그인</a>
+    <a th:href="@{/loginuser/register}">회원가입</a>
     <div th:if="${dto.memberType=='USER'}">
         <a href="/doLogout">로그아웃</a>
     </div>

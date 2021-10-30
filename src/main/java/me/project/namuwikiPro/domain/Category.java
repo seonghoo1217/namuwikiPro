@@ -31,4 +31,8 @@ public class Category extends BaseEntity{
     @OneToMany(mappedBy = "parentCategory")
     @Column(name = "child_cat")
     private List<Category> childCategories=new ArrayList<>();
+
+    @Column(name = "catergory_board")
+    @OneToMany(mappedBy = "category")
+    private List<Board> boards=new ArrayList<>();
 }

@@ -13,11 +13,14 @@ import java.util.Collections;
 
 public class AccountContext implements UserDetails {
 
+
+    private Long id;
     private String username;
     private String password;
     private String memberType;
 
     public AccountContext(Member member) {
+        this.id=member.getId();
         this.username = member.getUsername();
         this.password = member.getPassword();
         this.memberType = member.getMemberType();
@@ -38,6 +41,9 @@ public class AccountContext implements UserDetails {
     public String getUsername() {
         return this.username;
     }
+
+
+    public Long getId(){return this.id;}
 
     @Override
     public boolean isAccountNonExpired() {

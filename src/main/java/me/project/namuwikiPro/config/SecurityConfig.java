@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 
 @RequiredArgsConstructor
@@ -25,6 +26,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 public class SecurityConfig extends WebSecurityConfigurerAdapter { // 2
 
     private final Memberservice memberservice;
+    private final AuthenticationFailureHandler customFailurHandler;
 
     @Bean
     PasswordEncoder passwordEncoder(){
@@ -52,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // 2
                     .passwordParameter("password")
                     .loginProcessingUrl("/login_proc")
                     .defaultSuccessUrl("/")
+                    .failureHandler(customFailurHandler)
                     .permitAll()
                     .and()
                 .logout()

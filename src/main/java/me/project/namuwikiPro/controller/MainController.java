@@ -1,7 +1,9 @@
 package me.project.namuwikiPro.controller;
 
 import me.project.namuwikiPro.DTO.MemberDto;
+import me.project.namuwikiPro.principal.AccountContext;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -34,4 +36,11 @@ public class MainController {
     }
 
 
+    @GetMapping("")
+    public String sex(@AuthenticationPrincipal AccountContext accountContext){
+
+        accountContext.getId()
+
+        writeService.write(userId);
+    }
 }

@@ -3,6 +3,8 @@ package me.project.namuwikiPro.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -38,6 +40,13 @@ public class Member {
 
     @Column(name = "member_unique")
     private int unique;
+
+    @Column(name = "board_member")
+    @OneToMany(mappedBy = "member")
+    private List<Board> boards=new ArrayList<>();
+
+
+
 
     @Builder
     public Member(Long id,String realname, String username, String password,String street,String age,String memberType,int unique) {

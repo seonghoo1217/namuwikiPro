@@ -1,4 +1,4 @@
-package me.project.namuwikiPro.controller;
+package me.project.namuwikiPro.controller.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
