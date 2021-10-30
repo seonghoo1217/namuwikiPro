@@ -36,11 +36,4 @@ public class MainController {
     }
 
 
-    @GetMapping("")
-    public String sex(@AuthenticationPrincipal AccountContext accountContext){
-
-        accountContext.getId()
-
-        writeService.write(userId);
-    }
 }

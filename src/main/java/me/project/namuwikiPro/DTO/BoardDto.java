@@ -36,7 +36,6 @@ public class BoardDto {
         return Board.builder()
                 .id(id)
                 .title(title)
-                .writer(writer)
                 .content(content)
                 .category(category)
                 .latelyFeed(latelyFeed)

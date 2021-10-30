@@ -25,7 +25,6 @@ public class LatelyFeed extends BaseEntity{
     private Long id;
 
     @OneToMany(mappedBy ="latelyFeed")
-    @JoinColumn(name = "board_id")
     private List<Board> boards=new ArrayList<>();
 
 }

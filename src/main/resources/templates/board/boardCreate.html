@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <form method="post" action="board.html">
-        <label>제목입력</label>
-        <input type="text" placeholder="제목을 입력해주세요"/>
-        <label></label>
+    <form method="post" action="boardRead.html">
+        <label for="title">제목입력</label>
+        <br>
+        <input type="text" id="title" name="title" placeholder="제목을 입력해주세요"required="required"/>
+        <br>
+        <label>작성자</label>
+        <span th:text="${accountContext.username}"/>
+        <label for="content">내용입력</label>
+        <textarea id="content" name="content" placeholder="내용을 작성하여 주세요"cols="8" rows="5" style="resize: vertical" required="required"/>
+
+        <input type="submit" value="게시물 작성">
     </form>
 </body>
 </html>

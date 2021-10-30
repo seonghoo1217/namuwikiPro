@@ -29,17 +29,17 @@ public class BoardController {
         model.addAttribute("dto",dto);
         model.addAttribute("accountContext",accountContext);
 
-        return "boardCreate";
+        return "/board/boardCreate";
     }
     @PostMapping("/boardCreate")
-    public String boardCreate(BoardDto dto, @AuthenticationPrincipal AccountContext accountContext){
+    public String boardCreate(BoardDto dto, @AuthenticationPrincipal AccountContext accountContext,@PathVariable("id") Long id){
 
 
 
         boardService.boardSave(dto, accountContext.getId());
 
 
-        return "/{id}/readBoard";
+        return "/board/{id}/readBoard";
     }
 
 }
