@@ -2,13 +2,10 @@ package me.project.namuwikiPro.domain;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import me.project.namuwikiPro.DTO.BoardDto;
+import me.project.namuwikiPro.DTO.board.BoardDto;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 import static javax.persistence.FetchType.*;
 

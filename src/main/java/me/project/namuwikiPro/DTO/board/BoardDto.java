@@ -1,14 +1,12 @@
-package me.project.namuwikiPro.DTO;
+package me.project.namuwikiPro.DTO.board;
 
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import me.project.namuwikiPro.domain.Board;
 import me.project.namuwikiPro.domain.Category;
 import me.project.namuwikiPro.domain.LatelyFeed;
 
-@Getter
+@Data
 @NoArgsConstructor
 public class BoardDto {
 
@@ -34,7 +32,6 @@ public class BoardDto {
 
     public Board toEntity(){
         return Board.builder()
-                .id(id)
                 .title(title)
                 .content(content)
                 .category(category)

@@ -35,8 +35,8 @@ public class Member {
     @Column(name = "age")
     private String age;
 
-    @Column(name = "member_type")
-    private String memberType;
+    @Column(name = "role")
+    private String role;
 
     @Column(name = "member_unique")
     private int unique;
@@ -49,7 +49,7 @@ public class Member {
 
 
     @Builder
-    public Member(Long id,String realname, String username, String password,String street,String age,String memberType,int unique) {
+    public Member(Long id,String realname, String username, String password,String street,String age,String role,int unique) {
         this.id=id;
         this.realname = realname;
         this.username = username;
@@ -57,7 +57,7 @@ public class Member {
         this.street=street;
         this.age=age;
         this.unique=unique;
-        this.memberType=memberType;
+        this.role=role;
     }
 }
 

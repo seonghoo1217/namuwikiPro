@@ -36,20 +36,20 @@ public class MemberDto {
 
     private String street;
 
-    private String memberType;
+    private String role;
 
     private int unique;
 
 
     @Builder
-    public MemberDto(Long id,String realname, String username, String password,String street,String age,String memberType,int unique) {
+    public MemberDto(Long id,String realname, String username, String password,String street,String age,String role,int unique) {
         this.id=id;
         this.realname = realname;
         this.username = username;
         this.password = password;
         this.street=street;
         this.age=age;
-        this.memberType=memberType;
+        this.role=role;
         this.unique=unique;
     }
 
@@ -62,7 +62,7 @@ public class MemberDto {
                 .age(age)
                 .street(street)
                 .unique(unique)
-                .memberType(memberType)
+                .role(role)
                 .build();
     }
 

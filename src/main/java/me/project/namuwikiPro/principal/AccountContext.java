@@ -17,19 +17,19 @@ public class AccountContext implements UserDetails {
     private Long id;
     private String username;
     private String password;
-    private String memberType;
+    private String role;
 
     public AccountContext(Member member) {
         this.id=member.getId();
         this.username = member.getUsername();
         this.password = member.getPassword();
-        this.memberType = member.getMemberType();
+        this.role = member.getRole();
     }
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority(this.memberType));
+        return Collections.singletonList(new SimpleGrantedAuthority(this.role));
     }
 
     @Override

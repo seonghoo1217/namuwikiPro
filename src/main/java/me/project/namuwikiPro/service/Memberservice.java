@@ -28,9 +28,9 @@ public class Memberservice implements UserDetailsService {
          dto.setPassword(passwordEncoder.encode(dto.getPassword()));
 
         if(dto.getUsername().equals("seonghoo1217@naver.com")){
-             dto.setMemberType("ADMIN");
+             dto.setRole("ROLE_ADMIN");
             }else {
-            dto.setMemberType("USER");
+            dto.setRole("ROLE_USER");
         }
              return memberRepository.save(dto.toEntity()).getId();
     }

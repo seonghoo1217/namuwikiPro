@@ -1,4 +1,4 @@
-package me.project.namuwikiPro.DTO;
+package me.project.namuwikiPro.DTO.board;
 
 import lombok.Builder;
 import lombok.Getter;

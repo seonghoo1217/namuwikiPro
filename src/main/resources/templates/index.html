@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>나무위키:대문</title>
@@ -112,11 +115,11 @@
     <br>
     <br>
     <br>
-    <a th:href="@{/loginuser/login}">로그인</a>
-    <a th:href="@{/loginuser/register}">회원가입</a>
-    <div th:if="${dto.memberType=='USER'}">
-        <a href="/doLogout">로그아웃</a>
-    </div>
+
+     <li sec:authorize="!isAuthenticated()"> <a th:href="@{/loginuser/login}">로그인 </a> </li>
+    <li sec:authorize="!isAuthenticated()"> <a th:href="@{/loginuser/register}">회원가입 </a> </li>
+    <li sec:authorize="hasRole('ROLE_USER')"> <a href="/doLogout">로그아웃</a> </li>
+
 </header>
 
 <footer></footer>

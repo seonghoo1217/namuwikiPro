@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>BoardRead</title>
 </head>
 <body>
-
+    <label>제목</label>
+    <br>
+    <span th:text="${boardDto.getTitle()}"/>
+    <label>작성자</label>
+    <span th:text="${accountContext.getUsername()}"/>
+    <br>
+    <label>내용</label>
+    <br>
+    <span th:text="${boardDto.getContent()}"/>
 </body>
 </html>

@@ -17,12 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @Controller
-@RequestMapping("/")
 public class MainController {
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String index(Model model, MemberDto dto){
         model.addAttribute("dto",dto);
-        return "index";
+        return "/index";
     }
 
     @GetMapping("/doLogout")
