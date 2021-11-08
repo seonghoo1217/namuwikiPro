@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/board")
@@ -34,13 +37,14 @@ public class BoardController {
         return "/board/boardCreate";
     }
     @PostMapping("/boardCreate")
-    public String boardCreate(Model model,BoardDto dto){
+    public String boardCreate(Model model,BoardDto dto) throws UnsupportedEncodingException {
 
         log.info("boardCreate");
         boardService.boardSave(dto);
 
-        log.info("title={}", dto.getTitle());
-        return "redirect:read/"+dto.getTitle();
+        String title = URLEncoder.encode(dto.getTitle(), "UTF-8");
+
+        return "redirect:read/"+title;
     }
 
 
@@ -54,5 +58,33 @@ public class BoardController {
         return "board/boardRead";
     }
 
+    @PostMapping("/read/{title}")
+    public String readBoardUpdate(@PathVariable("title")String title,
+                                  @AuthenticationPrincipal AccountContext accountContext,
+                                  Model model,BoardDto dto) throws UnsupportedEncodingException {
 
+        log.info("boardupdat용 readpost");
+
+
+        return "redirect:/board/"+title+"/boardUpdate";
+    }
+
+
+
+    @GetMapping("/{title}/boardUpdate")
+    public String updateBoard(@PathVariable("title")String updateTitle,
+                              @AuthenticationPrincipal AccountContext accountContext,
+                              Model model,BoardDto dto) {
+        log.info("update호출");
+        model.addAttribute("dto",dto);
+
+
+        return "board/boardUpdate";
+    }
+
+    @GetMapping("/delete")
+    public String deleteBoard(BoardDto dto){
+        boardService.delete(dto.getId());
+        return "/delete";
+    }
 }

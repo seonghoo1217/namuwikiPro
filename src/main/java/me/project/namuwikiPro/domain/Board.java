@@ -12,7 +12,7 @@ import static javax.persistence.FetchType.*;
 @SequenceGenerator(
         name = "Board_SEQ_Generate",
         sequenceName = "Board_SEQ",
-        initialValue = 1,allocationSize = 50
+        initialValue = 1
 )
 
 @Entity @Getter @Setter

@@ -1,5 +1,6 @@
 var id_check_num;
-var register_num;
+
+
 
 
 function checkId(){
@@ -29,6 +30,7 @@ function checkId(){
             console.log(error, "중복 api 오류")
     });
 }
+
 
 function block_none_idCheck(){
     $('#registed').on('click',function (e){
