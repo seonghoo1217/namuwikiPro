@@ -10,6 +10,8 @@ import me.project.namuwikiPro.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 @Transactional(readOnly = true)
@@ -26,16 +28,18 @@ public class BoardService {
     @Transactional
     public void boardSave(BoardDto boardDto){
         Board board = boardDto.toEntity();
+        Member member = board.getMember();
         boardRepositry.save(board);
     }
 
     @Transactional
-    public Long boardUpdate(Long id,BoardUpdateDto boardUpdateDto){
-        Board board = boardRepositry.findById(id)
-                .orElseThrow(() -> new IllegalAccessError("[board_id=" + id + "] 해당 게시글이 존재하지 않습니다."));
+    public Long boardUpdate(String title, Board modiBoard){
+        Board board = boardRepositry.findByTitle(title)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. title = " + title));
 
-        board.update(id,boardUpdateDto.getTitle(),boardUpdateDto.getContent());
-        return id;
+        board.setContent(modiBoard.getContent());
+
+        return board.getId();
     }
 
     @Transactional

@@ -17,7 +17,7 @@
     <br>
     <span th:text="${boardDto.getContent()}"/>
 
-    <form method="post">
+    <form method="get" th:action="@{'/board/'+${boardDto.title} + '/boardUpdate'}">
         <button type="submit">수정하기</button>
     </form>
 </body>

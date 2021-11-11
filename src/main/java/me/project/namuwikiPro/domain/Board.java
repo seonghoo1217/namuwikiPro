@@ -24,7 +24,7 @@ public class Board extends BaseEntity{
     private Long id;
 
     @Lob
-    @Column(name = "board_title")
+    @Column(name = "board_title",unique = true)
     private String title;
 
     @Lob
@@ -45,20 +45,20 @@ public class Board extends BaseEntity{
 
 
     @Builder
-    public Board(Long id,String title,String content,Category category,LatelyFeed latelyFeed) {
+    public Board(Long id,String title,String content,Category category,LatelyFeed latelyFeed,Member member) {
         this.id=id;
         this.title=title;
         this.content=content;
         this.category=category;
         this.latelyFeed=latelyFeed;
+        this.member=member;
     }
 
     public Board() {
 
     }
 
-    public void update(Long id,String title,String content){
-        this.id=id;
+    public void update(String title,String content){
         this.title=title;
         this.content=content;
     }
@@ -70,6 +70,7 @@ public class Board extends BaseEntity{
                 .content(content)
                 .category(category)
                 .latelyFeed(latelyFeed)
+                .member(member)
                 .build();
     }
 

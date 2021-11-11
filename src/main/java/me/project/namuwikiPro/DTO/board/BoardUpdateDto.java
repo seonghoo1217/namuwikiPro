@@ -1,24 +1,19 @@
 package me.project.namuwikiPro.DTO.board;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import me.project.namuwikiPro.domain.Board;
 
-@Getter
+@Data
 @NoArgsConstructor
 @Builder
 public class BoardUpdateDto {
 
     private Long id;
-    private String title;
     private String content;
 
     @Builder
-    public BoardUpdateDto (Long id,String title,String content){
+    public BoardUpdateDto (Long id,String content){
         this.id=id;
-        this.title=title;
         this.content=content;
     }
 }
