@@ -5,6 +5,7 @@ import me.project.namuwikiPro.DTO.board.BoardDto;
 import me.project.namuwikiPro.DTO.board.BoardUpdateDto;
 import me.project.namuwikiPro.domain.Board;
 import me.project.namuwikiPro.domain.Member;
+import me.project.namuwikiPro.principal.AccountContext;
 import me.project.namuwikiPro.repository.BoardRepositry;
 import me.project.namuwikiPro.repository.MemberRepository;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,8 @@ public class BoardService {
     public void boardSave(BoardDto boardDto){
         Board board = boardDto.toEntity();
         Member member = board.getMember();
+        AccountContext accountContext=new AccountContext();
+        boardDto.setWriter(accountContext.getUsername());
         boardRepositry.save(board);
     }
 

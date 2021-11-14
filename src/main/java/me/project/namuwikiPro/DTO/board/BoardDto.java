@@ -16,16 +16,18 @@ public class BoardDto {
     private String title;
     private String writer;
     private String content;
+    private Long galleryId;
     private Category category;
     private LatelyFeed latelyFeed;
     private Member member;
 
     @Builder
-    public BoardDto(Long id,String title,String writer,String content,Category category,LatelyFeed latelyFeed,Member member){
+    public BoardDto(Long id,String title,String writer,String content,Long galleryId,Category category,LatelyFeed latelyFeed,Member member){
         this.id=id;
         this.title=title;
         this.writer=writer;
         this.content=content;
+        this.galleryId=galleryId;
         this.category=category;
         this.latelyFeed=latelyFeed;
         this.member=member;
@@ -37,7 +39,9 @@ public class BoardDto {
         return Board.builder()
                 .title(title)
                 .content(content)
+                .writer(writer)
                 .category(category)
+                .galleryId(galleryId)
                 .latelyFeed(latelyFeed)
                 .member(member)
                 .build();

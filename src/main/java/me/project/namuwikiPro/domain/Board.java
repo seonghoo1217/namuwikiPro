@@ -4,8 +4,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import me.project.namuwikiPro.DTO.board.BoardDto;
+import org.apache.tomcat.jni.Local;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 
 import javax.persistence.*;
+
+import java.time.LocalDateTime;
 
 import static javax.persistence.FetchType.*;
 
@@ -28,8 +33,14 @@ public class Board extends BaseEntity{
     private String title;
 
     @Lob
-    @Column(name = "Board_content")
+    @Column(name = "board_content")
     private String content;
+
+    @Column(name = "board_writer")
+    private String writer;
+
+    @Column(name = "galleryId")
+    private Long galleryId;
 
     @JoinColumn(name = "category_id")
     @ManyToOne(fetch = LAZY)
@@ -43,12 +54,24 @@ public class Board extends BaseEntity{
     @JoinColumn(name="member_id")
     private Member member;
 
+    @CreatedDate
+    @Column(updatable = false)
+    private LocalDateTime createDate;
+
+    @LastModifiedBy
+    private LocalDateTime modifiedDate;
+
+
 
     @Builder
-    public Board(Long id,String title,String content,Category category,LatelyFeed latelyFeed,Member member) {
+    public Board(Long id,String title,String content,String writer,Long galleryId,LocalDateTime createDate, LocalDateTime modifiedDate,Category category,LatelyFeed latelyFeed,Member member) {
         this.id=id;
         this.title=title;
         this.content=content;
+        this.writer=writer;
+        this.galleryId=galleryId;
+        this.createDate = createDate;
+        this.modifiedDate = modifiedDate;
         this.category=category;
         this.latelyFeed=latelyFeed;
         this.member=member;
@@ -69,7 +92,9 @@ public class Board extends BaseEntity{
                 .title(title)
                 .content(content)
                 .category(category)
+                .galleryId(galleryId)
                 .latelyFeed(latelyFeed)
+                .writer(writer)
                 .member(member)
                 .build();
     }

@@ -2,20 +2,28 @@ package me.project.namuwikiPro.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import me.project.namuwikiPro.DTO.GalleryDto;
 import me.project.namuwikiPro.DTO.board.BoardDto;
 import me.project.namuwikiPro.DTO.board.BoardUpdateDto;
 import me.project.namuwikiPro.domain.Board;
+import me.project.namuwikiPro.domain.Gallery;
 import me.project.namuwikiPro.principal.AccountContext;
 import me.project.namuwikiPro.repository.BoardRepositry;
 import me.project.namuwikiPro.service.BoardService;
+import me.project.namuwikiPro.service.GalleryService;
+import me.project.namuwikiPro.util.MD5Generator;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.security.NoSuchAlgorithmException;
 
 @RequiredArgsConstructor
 @Controller
@@ -24,6 +32,7 @@ import java.net.URLEncoder;
 public class BoardController {
     private final BoardService boardService;
     private final BoardRepositry boardRepositry;
+    private final GalleryService galleryService;
 
     @GetMapping("/boardCreate")
     public String boardCreateForm(Model model, BoardDto dto,
@@ -37,15 +46,16 @@ public class BoardController {
         return "/board/boardCreate";
     }
     @PostMapping("/boardCreate")
-    public String boardCreate(Model model,BoardDto dto) throws UnsupportedEncodingException {
+    public String boardCreate(Model model,BoardDto dto,@AuthenticationPrincipal AccountContext accountContext) throws UnsupportedEncodingException {
+
 
         log.info("boardCreate");
         boardService.boardSave(dto);
-
         String title = URLEncoder.encode(dto.getTitle(), "UTF-8");
 
         return "redirect:read/"+title;
     }
+
 
 
     @GetMapping("/read/{title}")
@@ -100,4 +110,38 @@ public class BoardController {
         boardService.delete(dto.getId());
         return "/delete";
     }
+
+    @PostMapping("/post")
+    public String imageWrite(@RequestParam("gallery")MultipartFile gallery,BoardDto dto) throws IOException, NoSuchAlgorithmException {
+        try {
+            String originalFilename=gallery.getOriginalFilename();
+            String filename=new MD5Generator(originalFilename).toString();
+            //실행되는위치에 files 폴더에 저장
+            String savePath=System.getProperty("user.dir")+"\\files";
+            //파일저장되는곳에 폴더없을시에 폴더생성
+            if(!new File(savePath).exists()){
+                try {
+                    new File(savePath).mkdir();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+            String filePath=savePath+"\\"+filename;
+            gallery.transferTo(new File(filePath));
+
+            GalleryDto galleryDto = new GalleryDto();
+            galleryDto.setOriginalFilename(originalFilename);
+            galleryDto.setFilename(filename);
+            galleryDto.setFilePath(filePath);
+
+            Long fileId=galleryService.saveFile(galleryDto);
+            dto.setGalleryId(fileId);
+            boardService.boardSave(dto);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "redirect:/";
+    }
+
+
 }

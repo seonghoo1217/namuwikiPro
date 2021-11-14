@@ -26,6 +26,10 @@ public class AccountContext implements UserDetails {
         this.role = member.getRole();
     }
 
+    public AccountContext() {
+
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
