@@ -10,12 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 
@@ -44,10 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // 2
         http
                 .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/","/loginuser/login","loginuser/register").permitAll()
+                    .antMatchers("/","/loginuser/","loginuser/register").permitAll()
                     .antMatchers("/loginuser/member","/board/**").hasRole("USER")
                     .antMatchers("/loginuser/admin").hasRole("ADMIN")
-                    .and()
+                    .and()  
                 .formLogin()
                     .loginPage("/loginuser/login")
                     .usernameParameter("username")
